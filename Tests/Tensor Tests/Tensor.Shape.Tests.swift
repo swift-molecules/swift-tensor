@@ -1,4 +1,4 @@
-import Tensor_Primitives_Test_Support
+import Tensor_Test_Support
 import Testing
 
 @Suite

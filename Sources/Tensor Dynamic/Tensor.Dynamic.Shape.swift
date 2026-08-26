@@ -1,4 +1,4 @@
-public import Tensor_Primitives_Core
+public import Tensor_Core
 
 extension Tensor.Dynamic {
 

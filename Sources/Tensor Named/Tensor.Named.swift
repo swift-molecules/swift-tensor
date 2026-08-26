@@ -1,6 +1,6 @@
-public import Memory_Heap_Primitives
-public import Storage_Contiguous_Primitives
-public import Tensor_Primitives_Core
+public import Memory_Heap
+public import Storage_Contiguous
+public import Tensor_Core
 
 extension Tensor {
 

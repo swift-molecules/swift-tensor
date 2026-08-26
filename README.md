@@ -1,7 +1,7 @@
-# Tensor Primitives
+# Tensor
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
-[![CI](https://github.com/swift-primitives/swift-tensor-primitives/actions/workflows/ci.yml/badge.svg)](https://github.com/swift-primitives/swift-tensor-primitives/actions/workflows/ci.yml)
+[![CI](https://github.com/swift-molecules/swift-tensor/actions/workflows/ci.yml/badge.svg)](https://github.com/swift-molecules/swift-tensor/actions/workflows/ci.yml)
 
 A runtime-shape n-dimensional tensor whose rank lives at the type level — `Tensor.Value<Element, Rank, Layout>` fixes rank as a compile-time value generic while per-axis sizes stay runtime values, owns its heap storage as a move-only value, and reports every shape, index, broadcast, reshape, and slice failure as a typed error instead of trapping.
 
@@ -23,7 +23,7 @@ The package provides the addressing, layout, broadcast, storage, and view machin
 ## Quick Start
 
 ```swift
-import Tensor_Primitives
+import Tensor
 
 // Rank is a type-level value generic; per-axis sizes are runtime values.
 var dims = InlineArray<2, Cardinal>(repeating: .zero)
@@ -56,7 +56,7 @@ Add the dependency to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-primitives/swift-tensor-primitives.git", branch: "main")
+    .package(url: "https://github.com/swift-molecules/swift-tensor.git", branch: "main")
 ]
 ```
 
@@ -66,7 +66,7 @@ Add a product to your target:
 .target(
     name: "App",
     dependencies: [
-        .product(name: "Tensor Primitives", package: "swift-tensor-primitives")
+        .product(name: "Tensor", package: "swift-tensor")
     ]
 )
 ```
@@ -79,10 +79,10 @@ The package is pre-1.0 — depend on `branch: "main"` until `0.1.0` is tagged. R
 
 | Product | Contents | When to import |
 |---------|----------|----------------|
-| `Tensor Primitives` | Umbrella — fixed-rank `Tensor.Value`, the addressing / layout / broadcast machinery, and both variants below | Most consumers |
-| `Tensor Dynamic Primitives` | `Tensor.Dynamic.Value<Element>` and `Tensor.Dynamic.Shape` — rank erased to a runtime array of cardinalities | Rank arrives with the data (file formats, model loaders) |
-| `Tensor Named Primitives` | `Tensor.Named<Element, each Axis>` — axes are a parameter pack of tag types | APIs where naming axes beats numbering them |
-| `Tensor Primitives Test Support` | Test scaffolding re-exports | Test targets only |
+| `Tensor` | Umbrella — fixed-rank `Tensor.Value`, the addressing / layout / broadcast machinery, and both variants below | Most consumers |
+| `Tensor Dynamic` | `Tensor.Dynamic.Value<Element>` and `Tensor.Dynamic.Shape` — rank erased to a runtime array of cardinalities | Rank arrives with the data (file formats, model loaders) |
+| `Tensor Named` | `Tensor.Named<Element, each Axis>` — axes are a parameter pack of tag types | APIs where naming axes beats numbering them |
+| `Tensor Test Support` | Test scaffolding re-exports | Test targets only |
 
 ---
 
@@ -112,9 +112,9 @@ do throws(Tensor.Broadcast.Error) {
 
 ## Related Packages
 
-- [`swift-buffer-primitives`](https://github.com/swift-primitives/swift-buffer-primitives) — the heap-backed linear buffer the tensor owns its elements in.
-- [`swift-cardinal-primitives`](https://github.com/swift-primitives/swift-cardinal-primitives) — the typed cardinality carried per axis in `Tensor.Shape`.
-- [`swift-ordinal-primitives`](https://github.com/swift-primitives/swift-ordinal-primitives) — the typed position carried per axis in `Tensor.Index.Position`.
+- [`swift-buffer`](https://github.com/swift-molecules/swift-buffer) — the heap-backed linear buffer the tensor owns its elements in.
+- [`swift-cardinal`](https://github.com/swift-molecules/swift-cardinal) — the typed cardinality carried per axis in `Tensor.Shape`.
+- [`swift-ordinal`](https://github.com/swift-molecules/swift-ordinal) — the typed position carried per axis in `Tensor.Index.Position`.
 
 ---
 

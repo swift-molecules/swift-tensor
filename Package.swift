@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-tensor-primitives",
+    name: "swift-tensor",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -12,182 +12,182 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "Tensor Primitives",
-            targets: ["Tensor Primitives"]
+            name: "Tensor",
+            targets: ["Tensor"]
         ),
         .library(
-            name: "Tensor Dynamic Primitives",
-            targets: ["Tensor Dynamic Primitives"]
+            name: "Tensor Dynamic",
+            targets: ["Tensor Dynamic"]
         ),
         .library(
-            name: "Tensor Named Primitives",
-            targets: ["Tensor Named Primitives"]
+            name: "Tensor Named",
+            targets: ["Tensor Named"]
         ),
         .library(
-            name: "Tensor Primitives Test Support",
-            targets: ["Tensor Primitives Test Support"]
+            name: "Tensor Test Support",
+            targets: ["Tensor Test Support"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-tagged-primitives.git",
+            url: "https://github.com/swift-molecules/swift-tagged.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-index-primitives.git",
+            url: "https://github.com/swift-molecules/swift-index.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-cardinal-primitives.git",
+            url: "https://github.com/swift-molecules/swift-cardinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-ordinal-primitives.git",
+            url: "https://github.com/swift-molecules/swift-ordinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-finite-primitives.git",
+            url: "https://github.com/swift-molecules/swift-finite.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-affine-primitives.git",
+            url: "https://github.com/swift-molecules/swift-affine.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-dimension-primitives.git",
+            url: "https://github.com/swift-molecules/swift-dimension.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-buffer-primitives.git",
+            url: "https://github.com/swift-molecules/swift-buffer.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-buffer-linear-primitives.git",
+            url: "https://github.com/swift-molecules/swift-buffer-linear.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-storage-primitives.git",
+            url: "https://github.com/swift-molecules/swift-storage.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-range-primitives.git",
+            url: "https://github.com/swift-molecules/swift-range.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-memory-primitives.git",
+            url: "https://github.com/swift-molecules/swift-memory.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-numeric-primitives.git",
+            url: "https://github.com/swift-molecules/swift-numeric.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-algebra-primitives.git",
+            url: "https://github.com/swift-molecules/swift-algebra.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-error-primitives.git",
+            url: "https://github.com/swift-molecules/swift-error.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-format-primitives.git",
+            url: "https://github.com/swift-molecules/swift-format.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-sequence-primitives.git",
+            url: "https://github.com/swift-molecules/swift-sequence.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-vector-primitives.git",
+            url: "https://github.com/swift-molecules/swift-vector.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-memory-heap-primitives.git",
+            url: "https://github.com/swift-molecules/swift-memory-heap.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-memory-allocation-primitives.git",
+            url: "https://github.com/swift-molecules/swift-memory-allocation.git",
             branch: "main"
         ),
     ],
     targets: [
 
         .target(
-            name: "Tensor Primitives Core",
+            name: "Tensor Core",
             dependencies: [
-                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
-                .product(name: "Index Primitives", package: "swift-index-primitives"),
-                .product(name: "Cardinal Primitives", package: "swift-cardinal-primitives"),
-                .product(name: "Ordinal Primitives", package: "swift-ordinal-primitives"),
-                .product(name: "Finite Primitives", package: "swift-finite-primitives"),
-                .product(name: "Affine Primitives", package: "swift-affine-primitives"),
-                .product(name: "Dimension Primitives", package: "swift-dimension-primitives"),
-                .product(name: "Buffer Primitives", package: "swift-buffer-primitives"),
+                .product(name: "Tagged", package: "swift-tagged"),
+                .product(name: "Index", package: "swift-index"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
+                .product(name: "Finite", package: "swift-finite"),
+                .product(name: "Affine", package: "swift-affine"),
+                .product(name: "Dimension", package: "swift-dimension"),
+                .product(name: "Buffer", package: "swift-buffer"),
                 .product(
-                    name: "Buffer Linear Primitives",
-                    package: "swift-buffer-linear-primitives"
+                    name: "Buffer Linear",
+                    package: "swift-buffer-linear"
                 ),
-                .product(name: "Storage Primitives", package: "swift-storage-primitives"),
-                .product(name: "Range Primitives", package: "swift-range-primitives"),
-                .product(name: "Memory Primitives", package: "swift-memory-primitives"),
+                .product(name: "Storage", package: "swift-storage"),
+                .product(name: "Range", package: "swift-range"),
+                .product(name: "Memory", package: "swift-memory"),
                 .product(
                     name: "Memory Allocator Primitive",
-                    package: "swift-memory-allocation-primitives"
+                    package: "swift-memory-allocation"
                 ),
                 .product(
-                    name: "Memory Allocator Protocol Primitives",
-                    package: "swift-memory-allocation-primitives"
+                    name: "Memory Allocator Protocol",
+                    package: "swift-memory-allocation"
                 ),
-                .product(name: "Numeric Primitives", package: "swift-numeric-primitives"),
-                .product(name: "Algebra Ring Primitives", package: "swift-algebra-primitives"),
-                .product(name: "Error Primitives", package: "swift-error-primitives"),
-                .product(name: "Format Primitives", package: "swift-format-primitives"),
-                .product(name: "Sequence Primitives", package: "swift-sequence-primitives"),
-                .product(name: "Vector Primitives", package: "swift-vector-primitives"),
+                .product(name: "Numeric", package: "swift-numeric"),
+                .product(name: "Algebra Ring", package: "swift-algebra"),
+                .product(name: "Error", package: "swift-error"),
+                .product(name: "Format", package: "swift-format"),
+                .product(name: "Sequence", package: "swift-sequence"),
+                .product(name: "Vector", package: "swift-vector"),
             ]
         ),
 
         .target(
-            name: "Tensor Dynamic Primitives",
+            name: "Tensor Dynamic",
             dependencies: [
-                "Tensor Primitives Core",
-                .product(name: "Memory Heap Primitives", package: "swift-memory-heap-primitives"),
+                "Tensor Core",
+                .product(name: "Memory Heap", package: "swift-memory-heap"),
             ]
         ),
         .target(
-            name: "Tensor Named Primitives",
+            name: "Tensor Named",
             dependencies: [
-                "Tensor Primitives Core",
-                .product(name: "Memory Heap Primitives", package: "swift-memory-heap-primitives"),
-            ]
-        ),
-
-        .target(
-            name: "Tensor Primitives",
-            dependencies: [
-                "Tensor Primitives Core",
-                "Tensor Dynamic Primitives",
-                "Tensor Named Primitives",
+                "Tensor Core",
+                .product(name: "Memory Heap", package: "swift-memory-heap"),
             ]
         ),
 
         .target(
-            name: "Tensor Primitives Test Support",
+            name: "Tensor",
             dependencies: [
-                "Tensor Primitives",
+                "Tensor Core",
+                "Tensor Dynamic",
+                "Tensor Named",
+            ]
+        ),
+
+        .target(
+            name: "Tensor Test Support",
+            dependencies: [
+                "Tensor",
                 .product(
-                    name: "Buffer Primitives Test Support",
-                    package: "swift-buffer-primitives"
+                    name: "Buffer Test Support",
+                    package: "swift-buffer"
                 ),
             ],
             path: "Tests/Support"
         ),
 
         .testTarget(
-            name: "Tensor Primitives Tests",
+            name: "Tensor Tests",
             dependencies: [
-                "Tensor Primitives",
-                "Tensor Primitives Test Support",
+                "Tensor",
+                "Tensor Test Support",
             ]
         ),
     ],

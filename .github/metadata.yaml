@@ -1,7 +1,7 @@
 # .github/metadata.yaml
 description: "Move-only, rank-typed n-dimensional tensors with typed-error shape, broadcast, and slice arithmetic for Swift."
 topics:
-  - primitives
+  - molecules
   - tensor
   - n-dimensional-array
 homepage: "https://swift-institute.org"
