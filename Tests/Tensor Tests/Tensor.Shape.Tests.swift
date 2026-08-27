@@ -1,4 +1,4 @@
-import Tensor_Test_Support
+import Tensor
 import Testing
 
 @Suite

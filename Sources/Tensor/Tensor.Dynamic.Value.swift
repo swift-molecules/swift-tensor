@@ -1,13 +1,12 @@
 public import Memory_Heap
 public import Storage_Contiguous
-public import Tensor_Core
 
-extension Tensor {
+extension Tensor.Dynamic {
 
-    public struct Named<Element: ~Copyable, each Axis: Tensor.Axis.`Protocol`>: ~Copyable {
+    public struct `Value`<Element: ~Copyable>: ~Copyable {
 
         @usableFromInline
-        package var _dims: [Cardinal]
+        package var _shape: Tensor.Dynamic.Shape
 
         @usableFromInline
         package var _storage:
@@ -16,16 +15,13 @@ extension Tensor {
 
         @inlinable
         public init(
+            shape: Tensor.Dynamic.Shape,
             storage:
                 consuming Buffer<
                     Storage_Primitive.Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
                 >.Linear
         ) {
-            var dims: [Cardinal] = []
-            for axisSize in repeat (each Axis).size {
-                dims.append(Cardinal(UInt(bitPattern: axisSize)))
-            }
-            self._dims = dims
+            self._shape = shape
             self._storage = storage
         }
     }
