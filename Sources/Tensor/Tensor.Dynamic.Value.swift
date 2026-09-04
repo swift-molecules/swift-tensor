@@ -1,4 +1,4 @@
-public import Memory_Heap
+public import Memory
 public import Storage_Contiguous
 
 extension Tensor.Dynamic {
