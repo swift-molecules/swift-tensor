@@ -1,3 +1,17 @@
+public import Cardinal
+public import Buffer_Linear_Primitive
+public import Memory_Allocator_Protocol
+public import Tagged
+public import Buffer_Linear
+public import Memory_Allocator
+public import Storage
+
+public import Index
+
+public import Buffer
+public import Storage_Memory
+public import Memory
+
 extension Tensor.Value where Element: Copyable {
 
     @inlinable
@@ -10,9 +24,9 @@ extension Tensor.Value where Element: Copyable {
             throw .productNotPreserved(from: fromCount, to: toCount)
         }
         var storage = Buffer<
-            Storage_Primitive.Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
+            Storage::Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
         >.Linear(
-            minimumCapacity: Index<Element>.Count(toCount)
+            minimumCapacity: Tagged<Element, Cardinal>(_unchecked: toCount)
         )
 
         self._storage.forEach { element in

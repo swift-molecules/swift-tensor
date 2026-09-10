@@ -1,3 +1,5 @@
+public import Ordinal
+
 extension Tensor.Index {
 
     public struct Position<let Rank: Int>: Copyable, Sendable {

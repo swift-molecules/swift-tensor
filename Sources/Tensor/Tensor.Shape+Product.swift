@@ -1,12 +1,18 @@
+public import Cardinal
+
 extension Tensor.Shape {
 
     @inlinable
     public var count: Cardinal {
-        var total: Int = 1
+        var total: UInt = 1
 
         (0..<Rank).forEach { axis in
-            total *= Int(bitPattern: dims[axis])
+            let (product, overflow) = total.multipliedReportingOverflow(
+                by: dims[axis].rawValue
+            )
+            precondition(!overflow, "Tensor shape element count overflow")
+            total = product
         }
-        return Cardinal(UInt(bitPattern: total))
+        return Cardinal(total)
     }
 }

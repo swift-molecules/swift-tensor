@@ -1,3 +1,5 @@
+public import Cardinal
+
 extension Tensor.Broadcast {
 
     @inlinable
@@ -7,7 +9,7 @@ extension Tensor.Broadcast {
     ) throws(Error) -> Tensor.Shape<Rank> {
         var dims = InlineArray<Rank, Cardinal>(repeating: .zero)
 
-        try (0..<Rank).forEach { (axis: Int) throws(Error) in
+        for axis in 0..<Rank {
             let a = lhs.dims[axis]
             let b = rhs.dims[axis]
             if a == b {

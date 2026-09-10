@@ -1,3 +1,19 @@
+public import Buffer_Linear_Primitive
+public import Memory_Allocator_Protocol
+public import Tagged
+public import Buffer_Linear
+public import Memory_Allocator
+public import Storage
+public import Difference
+
+public import Index
+
+public import Cardinal
+public import Ordinal
+public import Buffer
+public import Storage_Memory
+public import Memory
+
 extension Tensor.Value
 where
     Element: Copyable & Swift.Numeric,
@@ -24,18 +40,18 @@ where
         let total = resultShape.count
 
         var storage = Buffer<
-            Storage_Primitive.Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
+            Storage::Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
         >.Linear(
-            minimumCapacity: Index<Element>.Count(total)
+            minimumCapacity: Tagged<Element, Cardinal>(_unchecked: total)
         )
 
-        let mInt = Int(bitPattern: m)
-        let pInt = Int(bitPattern: p)
-        let nInt = Int(bitPattern: n)
-        let aRowStride = Int(bitPattern: self._strides.values[0])
-        let aColStride = Int(bitPattern: self._strides.values[1])
-        let bRowStride = Int(bitPattern: other._strides.values[0])
-        let bColStride = Int(bitPattern: other._strides.values[1])
+        let mInt = Int(exactly: m.rawValue)!
+        let pInt = Int(exactly: p.rawValue)!
+        let nInt = Int(exactly: n.rawValue)!
+        let aRowStride = try! self._strides.values[0].intValue()
+        let aColStride = try! self._strides.values[1].intValue()
+        let bRowStride = try! other._strides.values[0].intValue()
+        let bColStride = try! other._strides.values[1].intValue()
 
         (0..<mInt).forEach { i in
             (0..<nInt).forEach { k in
@@ -44,8 +60,9 @@ where
 
                     let aOffset = i * aRowStride + j * aColStride
                     let bOffset = j * bRowStride + k * bColStride
-                    let aIdx = Index<Element>(_unchecked: Ordinal(UInt(bitPattern: aOffset)))
-                    let bIdx = Index<Element>(_unchecked: Ordinal(UInt(bitPattern: bOffset)))
+                    precondition(aOffset >= 0 && bOffset >= 0)
+                    let aIdx = Index<Element>(_unchecked: Ordinal(UInt(aOffset)))
+                    let bIdx = Index<Element>(_unchecked: Ordinal(UInt(bOffset)))
                     accumulator += self._storage[aIdx] * other._storage[bIdx]
                 }
                 storage.append(accumulator)

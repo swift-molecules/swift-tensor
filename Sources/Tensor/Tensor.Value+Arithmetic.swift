@@ -1,3 +1,21 @@
+public import Cardinal
+public import Buffer_Linear_Primitive
+public import Memory_Allocator_Protocol
+public import Tagged
+public import Polarity
+public import Buffer_Linear
+public import Memory_Allocator
+public import Storage
+
+public import Index
+
+public import Ordinal
+public import Buffer
+public import Storage_Memory
+public import Memory
+
+public import Difference
+
 extension Tensor.Value
 where
     Element: Copyable & AdditiveArithmetic,
@@ -11,24 +29,21 @@ where
         let aligned = try Tensor.Broadcast.align(self._shape, other._shape)
         let count = aligned.count
         var newStorage = Buffer<
-            Storage_Primitive.Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
+            Storage::Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
         >.Linear(
-            minimumCapacity: Index<Element>.Count(count)
+            minimumCapacity: Tagged<Element, Cardinal>(_unchecked: count)
         )
 
         let lhsStrides = Tensor.Broadcast.strides(of: self._shape, aligned: aligned)
         let rhsStrides = Tensor.Broadcast.strides(of: other._shape, aligned: aligned)
-        let n = Int(bitPattern: count)
+        let n = Int(exactly: count.rawValue)!
         (0..<n).forEach { i in
             let position = Tensor.Broadcast.position(ofLinearIndex: i, in: aligned)
             let lhsOffset = position.linearize(strides: lhsStrides)
             let rhsOffset = position.linearize(strides: rhsStrides)
-            let lhsIdx = Index<Element>(
-                _unchecked: Ordinal(UInt(bitPattern: Int(bitPattern: lhsOffset)))
-            )
-            let rhsIdx = Index<Element>(
-                _unchecked: Ordinal(UInt(bitPattern: Int(bitPattern: rhsOffset)))
-            )
+            precondition(lhsOffset.polarity != .negative && rhsOffset.polarity != .negative)
+            let lhsIdx = Index<Element>(_unchecked: Ordinal(lhsOffset.magnitude.underlying.rawValue))
+            let rhsIdx = Index<Element>(_unchecked: Ordinal(rhsOffset.magnitude.underlying.rawValue))
             newStorage.append(self._storage[lhsIdx] + other._storage[rhsIdx])
         }
         return Tensor.Value<Element, Rank, Tensor.Layout.Order.Row>(
@@ -45,24 +60,21 @@ where
         let aligned = try Tensor.Broadcast.align(self._shape, other._shape)
         let count = aligned.count
         var newStorage = Buffer<
-            Storage_Primitive.Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
+            Storage::Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
         >.Linear(
-            minimumCapacity: Index<Element>.Count(count)
+            minimumCapacity: Tagged<Element, Cardinal>(_unchecked: count)
         )
 
         let lhsStrides = Tensor.Broadcast.strides(of: self._shape, aligned: aligned)
         let rhsStrides = Tensor.Broadcast.strides(of: other._shape, aligned: aligned)
-        let n = Int(bitPattern: count)
+        let n = Int(exactly: count.rawValue)!
         (0..<n).forEach { i in
             let position = Tensor.Broadcast.position(ofLinearIndex: i, in: aligned)
             let lhsOffset = position.linearize(strides: lhsStrides)
             let rhsOffset = position.linearize(strides: rhsStrides)
-            let lhsIdx = Index<Element>(
-                _unchecked: Ordinal(UInt(bitPattern: Int(bitPattern: lhsOffset)))
-            )
-            let rhsIdx = Index<Element>(
-                _unchecked: Ordinal(UInt(bitPattern: Int(bitPattern: rhsOffset)))
-            )
+            precondition(lhsOffset.polarity != .negative && rhsOffset.polarity != .negative)
+            let lhsIdx = Index<Element>(_unchecked: Ordinal(lhsOffset.magnitude.underlying.rawValue))
+            let rhsIdx = Index<Element>(_unchecked: Ordinal(rhsOffset.magnitude.underlying.rawValue))
             newStorage.append(self._storage[lhsIdx] - other._storage[rhsIdx])
         }
         return Tensor.Value<Element, Rank, Tensor.Layout.Order.Row>(
@@ -86,24 +98,21 @@ where
         let aligned = try Tensor.Broadcast.align(self._shape, other._shape)
         let count = aligned.count
         var newStorage = Buffer<
-            Storage_Primitive.Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
+            Storage::Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
         >.Linear(
-            minimumCapacity: Index<Element>.Count(count)
+            minimumCapacity: Tagged<Element, Cardinal>(_unchecked: count)
         )
 
         let lhsStrides = Tensor.Broadcast.strides(of: self._shape, aligned: aligned)
         let rhsStrides = Tensor.Broadcast.strides(of: other._shape, aligned: aligned)
-        let n = Int(bitPattern: count)
+        let n = Int(exactly: count.rawValue)!
         (0..<n).forEach { i in
             let position = Tensor.Broadcast.position(ofLinearIndex: i, in: aligned)
             let lhsOffset = position.linearize(strides: lhsStrides)
             let rhsOffset = position.linearize(strides: rhsStrides)
-            let lhsIdx = Index<Element>(
-                _unchecked: Ordinal(UInt(bitPattern: Int(bitPattern: lhsOffset)))
-            )
-            let rhsIdx = Index<Element>(
-                _unchecked: Ordinal(UInt(bitPattern: Int(bitPattern: rhsOffset)))
-            )
+            precondition(lhsOffset.polarity != .negative && rhsOffset.polarity != .negative)
+            let lhsIdx = Index<Element>(_unchecked: Ordinal(lhsOffset.magnitude.underlying.rawValue))
+            let rhsIdx = Index<Element>(_unchecked: Ordinal(rhsOffset.magnitude.underlying.rawValue))
             newStorage.append(self._storage[lhsIdx] * other._storage[rhsIdx])
         }
         return Tensor.Value<Element, Rank, Tensor.Layout.Order.Row>(
@@ -117,9 +126,9 @@ where
     public func scaled(by scalar: Element) -> Tensor.Value<Element, Rank, Tensor.Layout.Order.Row> {
         let count = self._shape.count
         var newStorage = Buffer<
-            Storage_Primitive.Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
+            Storage::Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
         >.Linear(
-            minimumCapacity: Index<Element>.Count(count)
+            minimumCapacity: Tagged<Element, Cardinal>(_unchecked: count)
         )
 
         self._storage.forEach { element in

@@ -1,3 +1,5 @@
+public import Cardinal
+
 extension Tensor.Reshape {
 
     public enum Error: Swift.Error, Sendable, Equatable {

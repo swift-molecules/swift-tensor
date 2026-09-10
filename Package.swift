@@ -26,23 +26,31 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-index.git",
+            url: "https://github.com/swift-atoms/swift-index.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-cardinal.git",
+            url: "https://github.com/swift-atoms/swift-cardinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-ordinal.git",
+            url: "https://github.com/swift-atoms/swift-ordinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-affine.git",
+            url: "https://github.com/swift-atoms/swift-difference.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-buffer.git",
+            url: "https://github.com/swift-atoms/swift-polarity.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-tagged.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-buffer.git",
             branch: "main"
         ),
         .package(
@@ -50,15 +58,19 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-storage.git",
+            url: "https://github.com/swift-atoms/swift-storage.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-memory.git",
+            url: "https://github.com/swift-atoms/swift-memory.git",
             branch: "main"
         ),
         .package(
             url: "https://github.com/swift-molecules/swift-memory-allocation.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-molecules/swift-storage-memory.git",
             branch: "main"
         ),
     ],
@@ -70,18 +82,22 @@ let package = Package(
                 .product(name: "Index", package: "swift-index"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
-                .product(name: "Affine", package: "swift-affine"),
+                .product(name: "Difference", package: "swift-difference"),
+                .product(name: "Polarity", package: "swift-polarity"),
                 .product(name: "Buffer", package: "swift-buffer"),
                 .product(
                     name: "Buffer Linear",
                     package: "swift-buffer-linear"
                 ),
-                .product(name: "Storage", package: "swift-storage"),
-                .product(name: "Memory", package: "swift-memory"),
                 .product(
-                    name: "Memory Allocator Primitive",
-                    package: "swift-memory-allocation"
+                    name: "Buffer Linear Primitive",
+                    package: "swift-buffer-linear"
                 ),
+                .product(name: "Tagged", package: "swift-tagged"),
+                .product(name: "Storage", package: "swift-storage"),
+                .product(name: "Storage Memory", package: "swift-storage-memory"),
+                .product(name: "Memory", package: "swift-memory"),
+                .product(name: "Memory Allocator", package: "swift-memory-allocation"),
                 .product(
                     name: "Memory Allocator Protocol",
                     package: "swift-memory-allocation"

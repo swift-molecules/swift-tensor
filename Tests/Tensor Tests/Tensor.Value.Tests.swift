@@ -1,3 +1,5 @@
+import Cardinal
+import Ordinal
 import Tensor
 import Testing
 

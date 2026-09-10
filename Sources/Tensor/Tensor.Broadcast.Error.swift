@@ -1,3 +1,5 @@
+public import Cardinal
+
 extension Tensor.Broadcast {
 
     public enum Error: Swift.Error, Sendable, Equatable {

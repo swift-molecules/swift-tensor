@@ -1,3 +1,19 @@
+public import Buffer_Linear_Primitive
+public import Memory_Allocator_Protocol
+public import Tagged
+public import Buffer_Linear
+public import Memory_Allocator
+public import Storage
+public import Difference
+
+public import Index
+
+public import Cardinal
+public import Ordinal
+public import Buffer
+public import Storage_Memory
+public import Memory
+
 extension Tensor.Value where Element: Copyable {
 
     @inlinable
@@ -9,20 +25,21 @@ extension Tensor.Value where Element: Copyable {
         let newShape = Tensor.Shape<2>(newDims)
         let count = newShape.count
         var newStorage = Buffer<
-            Storage_Primitive.Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
+            Storage::Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
         >.Linear(
-            minimumCapacity: Index<Element>.Count(count)
+            minimumCapacity: Tagged<Element, Cardinal>(_unchecked: count)
         )
 
-        let rows = Int(bitPattern: newDims[0])
-        let cols = Int(bitPattern: newDims[1])
-        let stride0 = Int(bitPattern: _strides.values[0])
-        let stride1 = Int(bitPattern: _strides.values[1])
+        let rows = Int(exactly: newDims[0].rawValue)!
+        let cols = Int(exactly: newDims[1].rawValue)!
+        let stride0 = try! _strides.values[0].intValue()
+        let stride1 = try! _strides.values[1].intValue()
         (0..<rows).forEach { newI in
             (0..<cols).forEach { newJ in
 
                 let srcOffset = newJ * stride0 + newI * stride1
-                let idx = Index<Element>(_unchecked: Ordinal(UInt(bitPattern: srcOffset)))
+                precondition(srcOffset >= 0)
+                let idx = Index<Element>(_unchecked: Ordinal(UInt(srcOffset)))
                 newStorage.append(_storage[idx])
             }
         }

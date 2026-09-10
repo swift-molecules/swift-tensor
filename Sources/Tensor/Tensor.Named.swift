@@ -1,5 +1,14 @@
+public import Buffer_Linear_Primitive
+public import Memory_Allocator_Protocol
+public import Buffer_Linear
+public import Memory_Allocator
+public import Storage
+
+public import Cardinal
+public import Buffer
+
 public import Memory
-public import Storage_Contiguous
+public import Storage_Memory
 
 extension Tensor {
 
@@ -10,19 +19,20 @@ extension Tensor {
 
         @usableFromInline
         package var _storage:
-            Buffer<Storage_Primitive.Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>>
+            Buffer<Storage::Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>>
                 .Linear
 
         @inlinable
         public init(
             storage:
                 consuming Buffer<
-                    Storage_Primitive.Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
+                    Storage::Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
                 >.Linear
         ) {
             var dims: [Cardinal] = []
             for axisSize in repeat (each Axis).size {
-                dims.append(Cardinal(UInt(bitPattern: axisSize)))
+                precondition(axisSize >= 0)
+                dims.append(Cardinal(UInt(axisSize)))
             }
             self._dims = dims
             self._storage = storage

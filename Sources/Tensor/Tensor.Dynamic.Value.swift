@@ -1,5 +1,13 @@
+public import Buffer_Linear_Primitive
+public import Memory_Allocator_Protocol
+public import Buffer_Linear
+public import Memory_Allocator
+public import Storage
+
+public import Buffer
+
 public import Memory
-public import Storage_Contiguous
+public import Storage_Memory
 
 extension Tensor.Dynamic {
 
@@ -10,7 +18,7 @@ extension Tensor.Dynamic {
 
         @usableFromInline
         package var _storage:
-            Buffer<Storage_Primitive.Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>>
+            Buffer<Storage::Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>>
                 .Linear
 
         @inlinable
@@ -18,7 +26,7 @@ extension Tensor.Dynamic {
             shape: Tensor.Dynamic.Shape,
             storage:
                 consuming Buffer<
-                    Storage_Primitive.Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
+                    Storage::Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Element>
                 >.Linear
         ) {
             self._shape = shape

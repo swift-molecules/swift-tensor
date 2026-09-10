@@ -1,3 +1,5 @@
+public import Cardinal
+
 extension Tensor {
 
     public struct Shape<let Rank: Int>: Copyable, Sendable {

@@ -1,21 +1,31 @@
+public import Cardinal
+public import Difference
+public import Ordinal
+public import Polarity
+
 extension Tensor.Index.Position {
 
     @inlinable
-    public func linearize(strides: Tensor.Strides<Rank>) -> Affine.Discrete.Vector {
-        var total: Int = 0
+    public func linearize(strides: Tensor.Strides<Rank>) -> Difference {
+        var total = Difference.zero
         (0..<Rank).forEach { k in
-
-            let position = Int(bitPattern: positions[k])
-            let stride = Int(bitPattern: strides.values[k])
-            total += position * stride
+            let stride = strides.values[k]
+            let (magnitude, overflow) = positions[k].rawValue.multipliedReportingOverflow(
+                by: stride.magnitude.underlying.rawValue
+            )
+            precondition(!overflow, "Tensor linear offset overflow")
+            let component = stride.polarity == .negative
+                ? Difference.negative(Difference.Magnitude(Cardinal(magnitude)))
+                : Difference.positive(Difference.Magnitude(Cardinal(magnitude)))
+            total += component
         }
-        return Affine.Discrete.Vector(total)
+        return total
     }
 
     @inlinable
     public func validate(against shape: Tensor.Shape<Rank>) throws(Tensor.Index.Error) {
 
-        try (0..<Rank).forEach { (k: Int) throws(Tensor.Index.Error) in
+        for k in 0..<Rank {
             let position = positions[k]
             let bound = shape.dims[k]
             if position >= bound {

@@ -1,3 +1,5 @@
+public import Ordinal
+
 extension Tensor.Slice {
 
     public enum Axis: Copyable, Sendable, Equatable {

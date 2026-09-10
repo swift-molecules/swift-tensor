@@ -1,3 +1,6 @@
+public import Cardinal
+public import Ordinal
+
 extension Tensor.Index {
 
     public enum Error: Swift.Error, Sendable, Equatable {
