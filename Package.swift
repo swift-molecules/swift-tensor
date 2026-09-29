@@ -59,18 +59,13 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-storage.git",
-            branch: "main"
-        ),
+            branch: "main", traits: ["Generational", "Memory"]),
         .package(
             url: "https://github.com/swift-atoms/swift-memory.git",
             branch: "main"
         ),
         .package(
             url: "https://github.com/swift-molecules/swift-memory-allocation.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-storage-memory.git",
             branch: "main"
         ),
     ],
@@ -95,7 +90,6 @@ let package = Package(
                 ),
                 .product(name: "Tagged", package: "swift-tagged"),
                 .product(name: "Storage", package: "swift-storage"),
-                .product(name: "Storage Memory", package: "swift-storage-memory"),
                 .product(name: "Memory", package: "swift-memory"),
                 .product(name: "Memory Allocator", package: "swift-memory-allocation"),
                 .product(

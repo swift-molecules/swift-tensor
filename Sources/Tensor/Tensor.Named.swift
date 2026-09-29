@@ -8,7 +8,6 @@ public import Cardinal
 public import Buffer
 
 public import Memory
-public import Storage_Memory
 
 extension Tensor {
 

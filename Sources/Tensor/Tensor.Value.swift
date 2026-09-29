@@ -5,7 +5,6 @@ public import Memory_Allocator
 public import Storage
 
 public import Buffer
-public import Storage_Memory
 public import Memory
 
 extension Tensor {

@@ -66,4 +66,4 @@ where
 public import Buffer_Linear_Primitive
 public import Memory
 public import Memory_Allocator
-public import Storage_Memory
+public import Storage

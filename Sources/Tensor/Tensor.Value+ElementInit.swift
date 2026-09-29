@@ -9,7 +9,6 @@ public import Index
 
 public import Cardinal
 public import Buffer
-public import Storage_Memory
 public import Memory
 
 extension Tensor.Value where Element: Copyable, Layout == Tensor.Layout.Order.Row {

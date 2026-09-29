@@ -2,7 +2,7 @@ public import Cardinal
 public import Buffer_Linear_Primitive
 public import Tagged
 public import Polarity
-public import Storage_Memory
+public import Storage
 public import Index
 
 public import Ordinal

@@ -10,7 +10,6 @@ public import Index
 
 public import Ordinal
 public import Buffer
-public import Storage_Memory
 public import Memory
 
 extension Tensor.Value where Element: Copyable {
