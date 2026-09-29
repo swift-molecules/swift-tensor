@@ -41,8 +41,8 @@ where
             let lhsOffset = position.linearize(strides: lhsStrides)
             let rhsOffset = position.linearize(strides: rhsStrides)
             precondition(lhsOffset.polarity != .negative && rhsOffset.polarity != .negative)
-            let lhsIdx = Index<Element>(_unchecked: Ordinal(lhsOffset.magnitude.underlying.rawValue))
-            let rhsIdx = Index<Element>(_unchecked: Ordinal(rhsOffset.magnitude.underlying.rawValue))
+            let lhsIdx = Index<Element>(_unchecked: Ordinal(lhsOffset.magnitude.value.rawValue))
+            let rhsIdx = Index<Element>(_unchecked: Ordinal(rhsOffset.magnitude.value.rawValue))
             newStorage.append(self._storage[lhsIdx] + other._storage[rhsIdx])
         }
         return Tensor.Value<Element, Rank, Tensor.Layout.Order.Row>(
@@ -72,8 +72,8 @@ where
             let lhsOffset = position.linearize(strides: lhsStrides)
             let rhsOffset = position.linearize(strides: rhsStrides)
             precondition(lhsOffset.polarity != .negative && rhsOffset.polarity != .negative)
-            let lhsIdx = Index<Element>(_unchecked: Ordinal(lhsOffset.magnitude.underlying.rawValue))
-            let rhsIdx = Index<Element>(_unchecked: Ordinal(rhsOffset.magnitude.underlying.rawValue))
+            let lhsIdx = Index<Element>(_unchecked: Ordinal(lhsOffset.magnitude.value.rawValue))
+            let rhsIdx = Index<Element>(_unchecked: Ordinal(rhsOffset.magnitude.value.rawValue))
             newStorage.append(self._storage[lhsIdx] - other._storage[rhsIdx])
         }
         return Tensor.Value<Element, Rank, Tensor.Layout.Order.Row>(
@@ -110,8 +110,8 @@ where
             let lhsOffset = position.linearize(strides: lhsStrides)
             let rhsOffset = position.linearize(strides: rhsStrides)
             precondition(lhsOffset.polarity != .negative && rhsOffset.polarity != .negative)
-            let lhsIdx = Index<Element>(_unchecked: Ordinal(lhsOffset.magnitude.underlying.rawValue))
-            let rhsIdx = Index<Element>(_unchecked: Ordinal(rhsOffset.magnitude.underlying.rawValue))
+            let lhsIdx = Index<Element>(_unchecked: Ordinal(lhsOffset.magnitude.value.rawValue))
+            let rhsIdx = Index<Element>(_unchecked: Ordinal(rhsOffset.magnitude.value.rawValue))
             newStorage.append(self._storage[lhsIdx] * other._storage[rhsIdx])
         }
         return Tensor.Value<Element, Rank, Tensor.Layout.Order.Row>(

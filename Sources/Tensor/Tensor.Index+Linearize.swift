@@ -11,7 +11,7 @@ extension Tensor.Index.Position {
         (0..<Rank).forEach { k in
             let stride = strides.values[k]
             let (magnitude, overflow) = positions[k].rawValue.multipliedReportingOverflow(
-                by: stride.magnitude.underlying.rawValue
+                by: stride.magnitude.value.rawValue
             )
             precondition(!overflow, "Tensor linear offset overflow")
             let component = stride.polarity == .negative

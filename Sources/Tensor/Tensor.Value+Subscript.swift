@@ -19,7 +19,7 @@ extension Tensor.Value where Element: Copyable {
         let offset = position.linearize(strides: _strides)
 
         precondition(offset.polarity != .negative, "Tensor linear offset must be nonnegative")
-        let flatIndex = Index<Element>(_unchecked: Ordinal(offset.magnitude.underlying.rawValue))
+        let flatIndex = Index<Element>(_unchecked: Ordinal(offset.magnitude.value.rawValue))
         return _storage[flatIndex]
     }
 }
