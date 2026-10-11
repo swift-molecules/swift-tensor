@@ -102,22 +102,22 @@ let package = Package(
         .target(
             name: "Tensor Standard Library Integration",
             dependencies: [
-                "Tensor"
+                .target(name: "Tensor")
             ]
         ),
 
         .target(
             name: "Tensor Apple Foundation Integration",
             dependencies: [
-                "Tensor",
-                "Tensor Standard Library Integration",
+                .target(name: "Tensor"),
+                .target(name: "Tensor Standard Library Integration"),
             ]
         ),
 
         .testTarget(
             name: "Tensor Tests",
             dependencies: [
-                "Tensor"
+                .target(name: "Tensor")
             ]
         ),
     ],
@@ -125,15 +125,14 @@ let package = Package(
 )
 
 for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
+    target.swiftSettings = (target.swiftSettings ?? []) + [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
         .enableUpcomingFeature("MemberImportVisibility"),
         .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-        .enableExperimentalFeature("Lifetimes"),
         .enableUpcomingFeature("InferIsolatedConformances"),
+        .enableExperimentalFeature("Lifetimes"),
+        .treatAllWarnings(as: .error),
     ]
-
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem
 }

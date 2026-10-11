@@ -17,7 +17,7 @@ where
 
 extension Tensor.Value
 where
-    Element: Copyable & Swift.Numeric,
+    Element: Copyable & Swift::Numeric,
     Layout == Tensor.Layout.Order.Row
 {
 

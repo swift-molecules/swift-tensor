@@ -2,7 +2,7 @@ public import Cardinal
 
 extension Tensor.Shape {
 
-    public enum Error: Swift.Error, Sendable, Equatable {
+    public enum Error: Swift::Error, Sendable, Equatable {
 
         case elementCountMismatch(expected: Cardinal, actual: Cardinal)
 

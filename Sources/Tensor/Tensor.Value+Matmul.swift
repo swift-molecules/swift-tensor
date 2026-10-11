@@ -1,7 +1,7 @@
 public import Buffer_Linear_Primitive
 public import Memory_Allocator_Protocol
 public import Tagged
-public import Buffer_Linear
+import Buffer_Linear
 public import Memory_Allocator
 public import Storage
 public import Difference
@@ -15,7 +15,7 @@ public import Memory
 
 extension Tensor.Value
 where
-    Element: Copyable & Swift.Numeric,
+    Element: Copyable & Swift::Numeric,
     Layout == Tensor.Layout.Order.Row,
     Rank == 2
 {

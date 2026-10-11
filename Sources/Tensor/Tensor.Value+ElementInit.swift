@@ -1,11 +1,11 @@
 public import Buffer_Linear_Primitive
 public import Memory_Allocator_Protocol
 public import Tagged
-public import Buffer_Linear
+import Buffer_Linear
 public import Memory_Allocator
 public import Storage
 
-public import Index
+import Index
 
 public import Cardinal
 public import Buffer

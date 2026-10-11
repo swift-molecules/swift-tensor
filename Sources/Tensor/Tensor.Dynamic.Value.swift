@@ -1,6 +1,6 @@
 public import Buffer_Linear_Primitive
-public import Memory_Allocator_Protocol
-public import Buffer_Linear
+import Memory_Allocator_Protocol
+import Buffer_Linear
 public import Memory_Allocator
 public import Storage
 

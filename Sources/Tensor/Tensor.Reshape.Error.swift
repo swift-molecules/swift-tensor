@@ -2,7 +2,7 @@ public import Cardinal
 
 extension Tensor.Reshape {
 
-    public enum Error: Swift.Error, Sendable, Equatable {
+    public enum Error: Swift::Error, Sendable, Equatable {
 
         case productNotPreserved(from: Cardinal, to: Cardinal)
 
