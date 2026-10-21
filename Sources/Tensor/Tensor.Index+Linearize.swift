@@ -14,7 +14,8 @@ extension Tensor.Index.Position {
                 by: stride.magnitude.value.rawValue
             )
             precondition(!overflow, "Tensor linear offset overflow")
-            let component = stride.polarity == .negative
+            let component =
+                stride.polarity == .negative
                 ? Difference.negative(Difference.Magnitude(Cardinal(magnitude)))
                 : Difference.positive(Difference.Magnitude(Cardinal(magnitude)))
             total += component

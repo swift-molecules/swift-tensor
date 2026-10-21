@@ -1,17 +1,15 @@
-public import Buffer_Linear_Primitive
-public import Memory_Allocator_Protocol
-public import Tagged
-import Buffer_Linear
-public import Memory_Allocator
-public import Storage
-public import Difference
-
-public import Index
-
-public import Cardinal
-public import Ordinal
 public import Buffer
+import Buffer_Linear
+public import Buffer_Linear_Primitive
+public import Cardinal
+public import Difference
+public import Index
 public import Memory
+public import Memory_Allocator
+public import Memory_Allocator_Protocol
+public import Ordinal
+public import Storage
+public import Tagged
 
 extension Tensor.Value
 where
@@ -44,13 +42,39 @@ where
             minimumCapacity: Tagged<Element, Cardinal>(_unchecked: total)
         )
 
-        let mInt = Int(exactly: m.rawValue)!
-        let pInt = Int(exactly: p.rawValue)!
-        let nInt = Int(exactly: n.rawValue)!
-        let aRowStride = try! self._strides.values[0].intValue()
-        let aColStride = try! self._strides.values[1].intValue()
-        let bRowStride = try! other._strides.values[0].intValue()
-        let bColStride = try! other._strides.values[1].intValue()
+        guard let mInt = Int(exactly: m.rawValue) else {
+            preconditionFailure("Tensor extent exceeds Int.max")
+        }
+        guard let pInt = Int(exactly: p.rawValue) else {
+            preconditionFailure("Tensor extent exceeds Int.max")
+        }
+        guard let nInt = Int(exactly: n.rawValue) else {
+            preconditionFailure("Tensor extent exceeds Int.max")
+        }
+        let aRowStride: Int
+        do {
+            aRowStride = try self._strides.values[0].intValue()
+        } catch {
+            preconditionFailure("Strides of a constructed tensor are representable as Int: \(error)")
+        }
+        let aColStride: Int
+        do {
+            aColStride = try self._strides.values[1].intValue()
+        } catch {
+            preconditionFailure("Strides of a constructed tensor are representable as Int: \(error)")
+        }
+        let bRowStride: Int
+        do {
+            bRowStride = try other._strides.values[0].intValue()
+        } catch {
+            preconditionFailure("Strides of a constructed tensor are representable as Int: \(error)")
+        }
+        let bColStride: Int
+        do {
+            bColStride = try other._strides.values[1].intValue()
+        } catch {
+            preconditionFailure("Strides of a constructed tensor are representable as Int: \(error)")
+        }
 
         (0..<mInt).forEach { i in
             (0..<nInt).forEach { k in

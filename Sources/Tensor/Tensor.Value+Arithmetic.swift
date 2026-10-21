@@ -1,19 +1,16 @@
-public import Cardinal
-public import Buffer_Linear_Primitive
-public import Memory_Allocator_Protocol
-public import Tagged
-public import Polarity
-import Buffer_Linear
-public import Memory_Allocator
-public import Storage
-
-public import Index
-
-public import Ordinal
 public import Buffer
-public import Memory
-
+import Buffer_Linear
+public import Buffer_Linear_Primitive
+public import Cardinal
 public import Difference
+public import Index
+public import Memory
+public import Memory_Allocator
+public import Memory_Allocator_Protocol
+public import Ordinal
+public import Polarity
+public import Storage
+public import Tagged
 
 extension Tensor.Value
 where
@@ -35,7 +32,9 @@ where
 
         let lhsStrides = Tensor.Broadcast.strides(of: self._shape, aligned: aligned)
         let rhsStrides = Tensor.Broadcast.strides(of: other._shape, aligned: aligned)
-        let n = Int(exactly: count.rawValue)!
+        guard let n = Int(exactly: count.rawValue) else {
+            preconditionFailure("Tensor extent exceeds Int.max")
+        }
         (0..<n).forEach { i in
             let position = Tensor.Broadcast.position(ofLinearIndex: i, in: aligned)
             let lhsOffset = position.linearize(strides: lhsStrides)
@@ -66,7 +65,9 @@ where
 
         let lhsStrides = Tensor.Broadcast.strides(of: self._shape, aligned: aligned)
         let rhsStrides = Tensor.Broadcast.strides(of: other._shape, aligned: aligned)
-        let n = Int(exactly: count.rawValue)!
+        guard let n = Int(exactly: count.rawValue) else {
+            preconditionFailure("Tensor extent exceeds Int.max")
+        }
         (0..<n).forEach { i in
             let position = Tensor.Broadcast.position(ofLinearIndex: i, in: aligned)
             let lhsOffset = position.linearize(strides: lhsStrides)
@@ -104,7 +105,9 @@ where
 
         let lhsStrides = Tensor.Broadcast.strides(of: self._shape, aligned: aligned)
         let rhsStrides = Tensor.Broadcast.strides(of: other._shape, aligned: aligned)
-        let n = Int(exactly: count.rawValue)!
+        guard let n = Int(exactly: count.rawValue) else {
+            preconditionFailure("Tensor extent exceeds Int.max")
+        }
         (0..<n).forEach { i in
             let position = Tensor.Broadcast.position(ofLinearIndex: i, in: aligned)
             let lhsOffset = position.linearize(strides: lhsStrides)

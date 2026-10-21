@@ -1,3 +1,3 @@
+import Foundation
 import Tensor
 import Tensor_Standard_Library_Integration
-import Foundation

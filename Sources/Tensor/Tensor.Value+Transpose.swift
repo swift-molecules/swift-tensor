@@ -1,17 +1,15 @@
-public import Buffer_Linear_Primitive
-public import Memory_Allocator_Protocol
-public import Tagged
-import Buffer_Linear
-public import Memory_Allocator
-public import Storage
-public import Difference
-
-public import Index
-
-public import Cardinal
-public import Ordinal
 public import Buffer
+import Buffer_Linear
+public import Buffer_Linear_Primitive
+public import Cardinal
+public import Difference
+public import Index
 public import Memory
+public import Memory_Allocator
+public import Memory_Allocator_Protocol
+public import Ordinal
+public import Storage
+public import Tagged
 
 extension Tensor.Value where Element: Copyable {
 
@@ -29,10 +27,24 @@ extension Tensor.Value where Element: Copyable {
             minimumCapacity: Tagged<Element, Cardinal>(_unchecked: count)
         )
 
-        let rows = Int(exactly: newDims[0].rawValue)!
-        let cols = Int(exactly: newDims[1].rawValue)!
-        let stride0 = try! _strides.values[0].intValue()
-        let stride1 = try! _strides.values[1].intValue()
+        guard let rows = Int(exactly: newDims[0].rawValue) else {
+            preconditionFailure("Tensor extent exceeds Int.max")
+        }
+        guard let cols = Int(exactly: newDims[1].rawValue) else {
+            preconditionFailure("Tensor extent exceeds Int.max")
+        }
+        let stride0: Int
+        do {
+            stride0 = try _strides.values[0].intValue()
+        } catch {
+            preconditionFailure("Strides of a constructed tensor are representable as Int: \(error)")
+        }
+        let stride1: Int
+        do {
+            stride1 = try _strides.values[1].intValue()
+        } catch {
+            preconditionFailure("Strides of a constructed tensor are representable as Int: \(error)")
+        }
         (0..<rows).forEach { newI in
             (0..<cols).forEach { newJ in
 

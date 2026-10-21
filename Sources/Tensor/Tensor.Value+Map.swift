@@ -1,16 +1,14 @@
-public import Cardinal
-public import Buffer_Linear_Primitive
-public import Memory_Allocator_Protocol
-public import Tagged
-import Buffer_Linear
-public import Memory_Allocator
-public import Storage
-
-public import Index
-
-public import Ordinal
 public import Buffer
+import Buffer_Linear
+public import Buffer_Linear_Primitive
+public import Cardinal
+public import Index
 public import Memory
+public import Memory_Allocator
+public import Memory_Allocator_Protocol
+public import Ordinal
+public import Storage
+public import Tagged
 
 extension Tensor.Value where Element: Copyable {
 
@@ -25,7 +23,9 @@ extension Tensor.Value where Element: Copyable {
             minimumCapacity: Tagged<NewElement, Cardinal>(_unchecked: count)
         )
 
-        let n = Int(exactly: count.rawValue)!
+        guard let n = Int(exactly: count.rawValue) else {
+            preconditionFailure("Tensor extent exceeds Int.max")
+        }
         for i in 0..<n {
             let idx = Index<Element>(_unchecked: Ordinal(UInt(i)))
             storage.append(try transform(self._storage[idx]))

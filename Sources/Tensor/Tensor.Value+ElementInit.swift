@@ -1,15 +1,13 @@
-public import Buffer_Linear_Primitive
-public import Memory_Allocator_Protocol
-public import Tagged
-import Buffer_Linear
-public import Memory_Allocator
-public import Storage
-
-import Index
-
-public import Cardinal
 public import Buffer
+import Buffer_Linear
+public import Buffer_Linear_Primitive
+public import Cardinal
+import Index
 public import Memory
+public import Memory_Allocator
+public import Memory_Allocator_Protocol
+public import Storage
+public import Tagged
 
 extension Tensor.Value where Element: Copyable, Layout == Tensor.Layout.Order.Row {
 

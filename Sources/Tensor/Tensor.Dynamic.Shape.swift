@@ -1,6 +1,5 @@
 public import Cardinal
 
-
 extension Tensor.Dynamic {
 
     public struct Shape: Copyable, Sendable, Equatable {

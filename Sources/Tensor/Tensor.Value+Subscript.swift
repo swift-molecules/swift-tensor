@@ -1,13 +1,11 @@
-public import Cardinal
 public import Buffer_Linear_Primitive
-public import Tagged
+public import Cardinal
+public import Difference
+public import Index
+public import Ordinal
 public import Polarity
 public import Storage
-public import Index
-
-public import Ordinal
-
-public import Difference
+public import Tagged
 
 extension Tensor.Value where Element: Copyable {
 

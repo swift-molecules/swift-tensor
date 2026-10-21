@@ -336,8 +336,7 @@ extension `Tensor Value Operations Tests`.Integration {
     }
 
     @Test
-    func `broadcast align with unit axis expands to other operand`() throws(Tensor.Broadcast.Error)
-    {
+    func `broadcast align with unit axis expands to other operand`() throws(Tensor.Broadcast.Error) {
         var dimsA = InlineArray<2, Cardinal>(repeating: .zero)
         dimsA[0] = .one
         dimsA[1] = Cardinal(3)

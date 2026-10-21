@@ -1,3 +1,8 @@
+public import Buffer_Linear_Primitive
+public import Memory
+public import Memory_Allocator
+public import Storage
+
 extension Tensor.Value
 where
     Element: Copyable & AdditiveArithmetic,
@@ -63,7 +68,3 @@ where
         return current
     }
 }
-public import Buffer_Linear_Primitive
-public import Memory
-public import Memory_Allocator
-public import Storage
