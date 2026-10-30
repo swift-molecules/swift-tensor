@@ -23,6 +23,9 @@ let package = Package(
             name: "Tensor Apple Foundation Integration",
             targets: ["Tensor Apple Foundation Integration"]
         ),
+        .library(name: "Tensors Operations", targets: ["Tensors Operations"]),
+        .library(name: "Tensors", targets: ["Tensors"]),
+        .library(name: "Tensors Test Support", targets: ["Tensors Test Support"]),
     ],
     dependencies: [
         .package(
@@ -68,6 +71,18 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/swift-molecules/swift-memory-allocation.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-complex.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-numeric.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-vector.git",
             branch: "main"
         ),
     ],
@@ -120,6 +135,47 @@ let package = Package(
             name: "Tensor Tests",
             dependencies: [
                 .target(name: "Tensor")
+            ]
+        ),
+        .target(
+            name: "Tensors Core",
+            dependencies: [
+                .target(name: "Tensor"),
+                .product(name: "Complex", package: "swift-complex"),
+                .product(name: "Numeric", package: "swift-numeric"),
+                .product(name: "Vector", package: "swift-vector"),
+            ]
+        ),
+        .target(
+            name: "Tensors Operations",
+            dependencies: [
+                .target(name: "Tensors Core"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
+            ]
+        ),
+        .target(
+            name: "Tensors",
+            dependencies: [
+                .target(name: "Tensors Core"),
+                .target(name: "Tensors Operations"),
+            ]
+        ),
+        .target(
+            name: "Tensors Test Support",
+            dependencies: [
+                .target(name: "Tensors"),
+                .target(name: "Tensor"),
+            ],
+            path: "Tests/Tensors Support"
+        ),
+        .testTarget(
+            name: "Tensors Tests",
+            dependencies: [
+                .target(name: "Tensors"),
+                .target(name: "Tensors Test Support"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
     ],
