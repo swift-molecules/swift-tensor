@@ -1,3 +1,5 @@
-import Foundation
-import Tensor
-import Tensor_Standard_Library_Integration
+#if !hasFeature(Embedded)
+    import Foundation
+    import Tensor
+    import Tensor_Standard_Library_Integration
+#endif
