@@ -3,12 +3,16 @@ import Ordinal
 import Tensors_Test_Support
 import Testing
 
-@Suite
-struct `Tensors Operations Tests` {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
-    @Suite(.serialized) struct Performance {}
+enum `Tensors.Operations Tests` {}
+
+extension `Tensors.Operations Tests` {
+    @Suite
+    struct `Tensors Operations Tests` {
+        @Suite struct Unit {}
+        @Suite struct `Edge Case` {}
+        @Suite struct Integration {}
+        @Suite(.serialized) struct Performance {}
+    }
 }
 
 private func rank1Tensor(
@@ -111,7 +115,7 @@ private func readElement<Element: Copyable, Layout: Tensor.Layout.`Protocol`>(
 
 private let elementWiseTolerance: Double = 1e-12
 
-extension `Tensors Operations Tests`.Unit {
+extension `Tensors.Operations Tests`.`Tensors Operations Tests`.Unit {
     @Test
     func `exp at zero equals one for every element`() throws(Tensor.Index.Error) {
         let zeros = rank1Tensor([0.0, 0.0, 0.0])
@@ -182,7 +186,7 @@ extension `Tensors Operations Tests`.Unit {
     }
 }
 
-extension `Tensors Operations Tests`.Unit {
+extension `Tensors.Operations Tests`.`Tensors Operations Tests`.Unit {
     @Test
     func `mean of one through four equals two point five`() {
         let input = rank1Tensor([1.0, 2.0, 3.0, 4.0])
@@ -223,7 +227,7 @@ extension `Tensors Operations Tests`.Unit {
 
 }
 
-extension `Tensors Operations Tests`.Unit {
+extension `Tensors.Operations Tests`.`Tensors Operations Tests`.Unit {
     @Test
     func `matrix-vector product computes y equal A x`() {
 
@@ -286,7 +290,7 @@ extension `Tensors Operations Tests`.Unit {
     }
 }
 
-extension `Tensors Operations Tests`.`Edge Case` {
+extension `Tensors.Operations Tests`.`Tensors Operations Tests`.`Edge Case` {
     @Test
     func `matrix-vector multiply with mismatched inner dim throws`() {
         let a = rank2Tensor(2, 3, [1.0, 2.0, 3.0, 4.0, 5.0, 6.0])
@@ -359,7 +363,7 @@ extension `Tensors Operations Tests`.`Edge Case` {
 
 }
 
-extension `Tensors Operations Tests`.Integration {
+extension `Tensors.Operations Tests`.`Tensors Operations Tests`.Integration {
     @Test
     func `exp then log returns approximately the input`() throws(Tensor.Index.Error) {
         let input = rank1Tensor([1.0, 2.0, 3.0])

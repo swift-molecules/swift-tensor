@@ -3,12 +3,16 @@ import Ordinal
 import Tensor
 import Testing
 
-@Suite
-struct `Tensor Value Operations Tests` {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
-    @Suite(.serialized) struct Performance {}
+enum `Tensor.Operations Tests` {}
+
+extension `Tensor.Operations Tests` {
+    @Suite
+    struct `Tensor Value Operations Tests` {
+        @Suite struct Unit {}
+        @Suite struct `Edge Case` {}
+        @Suite struct Integration {}
+        @Suite(.serialized) struct Performance {}
+    }
 }
 
 private func readElement<Element: Copyable, Layout: Tensor.Layout.`Protocol`>(
@@ -52,7 +56,7 @@ private func rank3Shape(_ d0: Int, _ d1: Int, _ d2: Int) -> Tensor.Shape<3> {
     return Tensor.Shape<3>(dims)
 }
 
-extension `Tensor Value Operations Tests`.Unit {
+extension `Tensor.Operations Tests`.`Tensor Value Operations Tests`.Unit {
     @Test
     func `element-wise addition produces correct sums`() throws {
         let shape = rank2Shape(2, 2)
@@ -326,7 +330,7 @@ extension `Tensor Value Operations Tests`.Unit {
     }
 }
 
-extension `Tensor Value Operations Tests`.Integration {
+extension `Tensor.Operations Tests`.`Tensor Value Operations Tests`.Integration {
     @Test
     func `broadcast align on same shape returns same shape`() throws(Tensor.Broadcast.Error) {
         let s = rank2Shape(2, 3)
@@ -351,7 +355,7 @@ extension `Tensor Value Operations Tests`.Integration {
     }
 }
 
-extension `Tensor Value Operations Tests`.`Edge Case` {
+extension `Tensor.Operations Tests`.`Tensor Value Operations Tests`.`Edge Case` {
     @Test
     func `matmul with incompatible inner dim throws incompatibleShapes`() throws {
         let aShape = rank2Shape(2, 3)

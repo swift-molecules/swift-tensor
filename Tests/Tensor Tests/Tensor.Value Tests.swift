@@ -3,15 +3,19 @@ import Ordinal
 import Tensor
 import Testing
 
-@Suite
-struct `Tensor Value Tests` {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
-    @Suite(.serialized) struct Performance {}
+enum `Tensor.Value Tests` {}
+
+extension `Tensor.Value Tests` {
+    @Suite
+    struct `Tensor Value Tests` {
+        @Suite struct Unit {}
+        @Suite struct `Edge Case` {}
+        @Suite struct Integration {}
+        @Suite(.serialized) struct Performance {}
+    }
 }
 
-extension `Tensor Value Tests`.Unit {
+extension `Tensor.Value Tests`.`Tensor Value Tests`.Unit {
     @Test
     func `constructs row-major rank-2 tensor from elements`() throws(Tensor.Shape<2>.Error) {
         var dims = InlineArray<2, Cardinal>(repeating: .zero)
@@ -48,7 +52,7 @@ extension `Tensor Value Tests`.Unit {
     }
 }
 
-extension `Tensor Value Tests`.`Edge Case` {
+extension `Tensor.Value Tests`.`Tensor Value Tests`.`Edge Case` {
     @Test
     func `mismatched element count throws elementCountMismatch`() {
         var dims = InlineArray<2, Cardinal>(repeating: .zero)

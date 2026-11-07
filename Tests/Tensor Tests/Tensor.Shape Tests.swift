@@ -2,15 +2,19 @@ import Cardinal
 import Tensor
 import Testing
 
-@Suite
-struct `Tensor Shape Tests` {
-    @Suite struct Unit {}
-    @Suite struct `Edge Case` {}
-    @Suite struct Integration {}
-    @Suite(.serialized) struct Performance {}
+enum `Tensor.Shape Tests` {}
+
+extension `Tensor.Shape Tests` {
+    @Suite
+    struct `Tensor Shape Tests` {
+        @Suite struct Unit {}
+        @Suite struct `Edge Case` {}
+        @Suite struct Integration {}
+        @Suite(.serialized) struct Performance {}
+    }
 }
 
-extension `Tensor Shape Tests`.Unit {
+extension `Tensor.Shape Tests`.`Tensor Shape Tests`.Unit {
     @Test
     func `constructs rank-3 shape with given dims`() {
         var dims = InlineArray<3, Cardinal>(repeating: .zero)
