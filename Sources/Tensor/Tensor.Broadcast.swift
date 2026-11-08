@@ -1,6 +1,6 @@
 public import Cardinal
-public import Ordinal
 public import Difference
+public import Ordinal
 
 extension Tensor {
 

@@ -1,5 +1,5 @@
-public import Difference
 public import Cardinal
+public import Difference
 
 extension Tensor {
 

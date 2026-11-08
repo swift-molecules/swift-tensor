@@ -1,6 +1,6 @@
-public import Ordinal
 public import Cardinal
 public import Difference
+public import Ordinal
 public import Polarity
 
 extension Tensor.Index {
