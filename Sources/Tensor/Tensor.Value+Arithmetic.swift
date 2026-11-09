@@ -138,7 +138,7 @@ where
         }
         return Tensor.Value<Element, Rank, Tensor.Layout.Order.Row>(
             shape: self._shape,
-            strides: self._strides,
+            strides: Tensor.Strides<Rank>(rowMajor: self._shape),
             storage: newStorage
         )
     }
