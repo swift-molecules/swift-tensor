@@ -24,7 +24,7 @@ extension Tensor {
                 .Linear
 
         @inlinable
-        public init(
+        package init(
             shape: Tensor.Shape<Rank>,
             strides: Tensor.Strides<Rank>,
             storage:
