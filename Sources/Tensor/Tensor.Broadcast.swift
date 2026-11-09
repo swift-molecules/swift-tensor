@@ -56,7 +56,10 @@ extension Tensor.Broadcast {
         var remaining = linearIndex
 
         stride(from: Rank - 1, through: 0, by: -1).forEach { axis in
-            guard let dim = Int(exactly: shape.dims[axis].rawValue) else {
+            let dim: Int
+            do throws(Cardinal.Error) {
+                dim = try Int(shape.dims[axis])
+            } catch {
                 preconditionFailure("Tensor extent exceeds Int.max")
             }
             positions[axis] = Ordinal(UInt(remaining % dim))

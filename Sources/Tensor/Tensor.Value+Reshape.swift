@@ -29,10 +29,13 @@ extension Tensor.Value where Element: Copyable {
             minimumCapacity: Tagged<Element, Cardinal>(_unchecked: toCount)
         )
 
-        guard let n = Int(exactly: toCount.rawValue) else {
+        let n: Int
+        do throws(Cardinal.Error) {
+            n = try Int(toCount)
+        } catch {
             preconditionFailure("Tensor extent exceeds Int.max")
         }
-        for i in 0..<n {
+        (0..<n).forEach { i in
             let position = Tensor.Broadcast.position(ofLinearIndex: i, in: self._shape)
             let offset = position.linearize(strides: self._strides)
             precondition(offset.polarity != .negative, "Tensor linear offset must be nonnegative")

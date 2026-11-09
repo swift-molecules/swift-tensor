@@ -42,13 +42,22 @@ where
             minimumCapacity: Tagged<Element, Cardinal>(_unchecked: total)
         )
 
-        guard let mInt = Int(exactly: m.rawValue) else {
+        let mInt: Int
+        do throws(Cardinal.Error) {
+            mInt = try Int(m)
+        } catch {
             preconditionFailure("Tensor extent exceeds Int.max")
         }
-        guard let pInt = Int(exactly: p.rawValue) else {
+        let pInt: Int
+        do throws(Cardinal.Error) {
+            pInt = try Int(p)
+        } catch {
             preconditionFailure("Tensor extent exceeds Int.max")
         }
-        guard let nInt = Int(exactly: n.rawValue) else {
+        let nInt: Int
+        do throws(Cardinal.Error) {
+            nInt = try Int(n)
+        } catch {
             preconditionFailure("Tensor extent exceeds Int.max")
         }
         let aRowStride: Int

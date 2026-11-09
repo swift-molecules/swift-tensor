@@ -25,7 +25,10 @@ extension Tensor.Value where Element: Copyable {
             minimumCapacity: Tagged<NewElement, Cardinal>(_unchecked: count)
         )
 
-        guard let n = Int(exactly: count.rawValue) else {
+        let n: Int
+        do throws(Cardinal.Error) {
+            n = try Int(count)
+        } catch {
             preconditionFailure("Tensor extent exceeds Int.max")
         }
         for i in 0..<n {

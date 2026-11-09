@@ -27,10 +27,16 @@ extension Tensor.Value where Element: Copyable {
             minimumCapacity: Tagged<Element, Cardinal>(_unchecked: count)
         )
 
-        guard let rows = Int(exactly: newDims[0].rawValue) else {
+        let rows: Int
+        do throws(Cardinal.Error) {
+            rows = try Int(newDims[0])
+        } catch {
             preconditionFailure("Tensor extent exceeds Int.max")
         }
-        guard let cols = Int(exactly: newDims[1].rawValue) else {
+        let cols: Int
+        do throws(Cardinal.Error) {
+            cols = try Int(newDims[1])
+        } catch {
             preconditionFailure("Tensor extent exceeds Int.max")
         }
         let stride0: Int

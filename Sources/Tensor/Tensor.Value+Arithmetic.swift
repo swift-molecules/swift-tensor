@@ -32,7 +32,10 @@ where
 
         let lhsStrides = Tensor.Broadcast.strides(of: self._shape, aligned: aligned)
         let rhsStrides = Tensor.Broadcast.strides(of: other._shape, aligned: aligned)
-        guard let n = Int(exactly: count.rawValue) else {
+        let n: Int
+        do throws(Cardinal.Error) {
+            n = try Int(count)
+        } catch {
             preconditionFailure("Tensor extent exceeds Int.max")
         }
         (0..<n).forEach { i in
@@ -65,7 +68,10 @@ where
 
         let lhsStrides = Tensor.Broadcast.strides(of: self._shape, aligned: aligned)
         let rhsStrides = Tensor.Broadcast.strides(of: other._shape, aligned: aligned)
-        guard let n = Int(exactly: count.rawValue) else {
+        let n: Int
+        do throws(Cardinal.Error) {
+            n = try Int(count)
+        } catch {
             preconditionFailure("Tensor extent exceeds Int.max")
         }
         (0..<n).forEach { i in
@@ -105,7 +111,10 @@ where
 
         let lhsStrides = Tensor.Broadcast.strides(of: self._shape, aligned: aligned)
         let rhsStrides = Tensor.Broadcast.strides(of: other._shape, aligned: aligned)
-        guard let n = Int(exactly: count.rawValue) else {
+        let n: Int
+        do throws(Cardinal.Error) {
+            n = try Int(count)
+        } catch {
             preconditionFailure("Tensor extent exceeds Int.max")
         }
         (0..<n).forEach { i in
