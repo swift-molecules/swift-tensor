@@ -9,6 +9,7 @@ where
 
     @inlinable
     public func mean() -> Element {
+        precondition(self.shape.count != .zero, "mean() of an empty tensor is undefined")
         let total: Element = self.sum()
 
         let count = Element(Int(bitPattern: self.shape.count))

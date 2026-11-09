@@ -410,3 +410,26 @@ extension `Tensors.Operations Tests`.`Tensors Operations Tests`.Integration {
         #expect((s * s - v).magnitude < elementWiseTolerance)
     }
 }
+
+extension `Tensors.Operations Tests`.`Tensors Operations Tests`.`Edge Case` {
+    @Test
+    func `mean of an empty tensor stops at its precondition`() async {
+        await #expect(processExitsWith: .failure) {
+            _ = rank1Tensor([]).mean()
+        }
+    }
+
+    @Test
+    func `variance of an empty tensor stops at its precondition`() async {
+        await #expect(processExitsWith: .failure) {
+            _ = rank1Tensor([]).variance()
+        }
+    }
+
+    @Test
+    func `stdev of an empty tensor stops at its precondition`() async {
+        await #expect(processExitsWith: .failure) {
+            _ = rank1Tensor([]).stdev()
+        }
+    }
+}

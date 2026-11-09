@@ -9,6 +9,7 @@ where
 
     @inlinable
     public func variance() -> Element {
+        precondition(self.shape.count != .zero, "variance() of an empty tensor is undefined")
         let m: Element = self.mean()
         let squaredDeviations: Tensor.Value<Element, Rank, Tensor.Layout.Order.Row> =
             self.map { (x: Element) -> Element in
